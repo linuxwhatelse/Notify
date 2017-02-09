@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <integer-array name="snooze_dialog_data_values">
+        <item>-1</item>
+        <item>1</item>
+        <item>2</item>
+        <item>4</item>
+        <item>8</item>
+        <item>24</item>
+        <item>48</item>
+        <item>72</item>
+    </integer-array>
+</resources>

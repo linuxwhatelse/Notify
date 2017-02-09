@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<string name="app_name">Notify</string>
+
+	<!-- Toasts, Dialogs, Listview-Emptytext etc. -->
+	<string name="not_implemented_yet">Not implemented yet</string>
+
+	<string name="notification_title">Do you like my app?</string>
+	<string name="notification_ticker_text">Notify test-notification</string>
+	<string name="notification_text">Why don\'t give a small donation than? It will help further development and really means a lot to me</string>
+	<string name="notification_big_text">Why don\'t give a small donation than? It will help further development and really means a lot to me</string>
+
+	<string name="message_listview_clients_empty">You haven\&#39;t added a client yet.</string>
+	<string name="message_activate_notification_access">For this app to work you have to enable it in "Notification Access"</string>
+	<string name="message_donate_success">Thank you very much for your donation. This means a lot to me and supports further development</string>
+	<string name="message_donate_failed">Sadly something went wrong while processing your donation. Maybe you want to try it again?</string>
+	<string name="qr_scan_failed">Something went wrong</string>
+
+	<string name="snoozed_notifications_title">Notifications snoozed</string>
+	<string name="snoozed_all_title">All events snoozed</string>
+	<string name="snoozed_text_resume_at">Will resume at</string>
+	<string name="snoozed_text_resume_indefinitely">Snoozed indefinitely</string>
+	<string name="snoozed_action_resume">Resume</string>
+
+	<!-- Toolbar, Contextmenu etc. -->
+	<string name="activate">Activate</string>
+	<string name="main_toolbar_menu_test_notification">Create test notification</string>
+	<string name="application_toolbar_menu_search">Search</string>
+	<string name="application_toolbar_menu_all_apps">Show all apps</string>
+	<string name="client_preference_toolbar_menu_delete">Delete</string>
+	<string name="devices_context_menu_edit">Edit</string>
+	<string name="devices_context_menu_delete">Delete</string>
+	<string name="fab_add_via_qr_code">Add via QR-Code</string>
+	<string name="fab_add_manually">Add manually</string>
+	<string name="client_new_title">New client</string>
+
+	<!-- Dialogs -->
+	<string name="dialog_snooze_notifications_title">Snooze notifications for…</string>
+	<string name="dialog_snooze_events_title">Snooze events for…</string>
+
+	<!-- Navigation Drawer -->
+    <string name="navdrawer_open">Open navigation drawer</string>
+    <string name="navdrawer_close">Close navigation drawer</string>
+
+	<string name="navdrawer_apps">Applications</string>
+	<string name="navdrawer_events">Events</string>
+	<string name="navdrawer_devices">Devices</string>
+	<string name="navdrawer_snooze_notifications_only">Snooze Notifications only</string>
+	<string name="navdrawer_snooze_all_events">Snooze all events</string>
+	<string name="navdrawer_donate">Donate</string>
+    <string name="navdrawer_about">About</string>
+    <string name="navdrawer_settings">Settings</string>
+
+	<!-- Client Preference s-->
+	<string name="client_preference_category_connection">Connection</string>
+	<string name="client_preference_category_notification">Notifications</string>
+	<string name="client_preference_category_events">Events</string>
+
+	<string name="client_preference_enable">Enabled</string>
+	<string name="client_preference_category_connection_client_name">Client name</string>
+	<string name="client_preference_category_connection_host">Host / IP</string>
+	<string name="client_preference_category_connection_port">Port</string>
+	<string name="client_preference_category_connection_user">Username</string>
+	<string name="client_preference_category_connection_pwd">Password</string>
+	<string name="client_preference_category_connection_ssid">Allowed network SSID</string>
+
+	<string name="client_preference_category_notification_overwrite_global">Overwrite global settings</string>
+	<string name="client_preference_category_notification_notifications">Notifications</string>
+	<string name="client_preference_category_notification_overwrite_global_summary">If enabled you can overwrite the global specified apps and set them specifically for this client</string>
+
+	<string name="client_preference_category_event_overwrite_global">Overwrite global settings</string>
+	<string name="client_preference_category_event_events">Events</string>
+	<string name="client_preference_category_events_overwrite_global_summary">If enabled you can overwrite the global specified events and set them specifically for this client</string>
+
+	<!-- Events Preferences -->
+	<string name="events_preference_call">Call events</string>
+	<string name="events_preference_call_summary">Notify all clients about call events (incoming-, outgoing-, missed calls)</string>
+
+    <!-- Preferences -->
+    <string name="preference_dark_theme">Dark theme</string>
+    <string name="preference_theme_summary">For this change to take affect you have to restart the app</string>
+
+	<!-- About -->
+	<string name="about_version">Version</string>
+	<string name="about_licenses">Open Source Licenses</string>
+	<string name="about_lwe_google_plus">Google+</string>
+	<string name="about_lwe_github">Github</string>
+	<string name="about_lwe_homepage">Homepage</string>
+
+	<!-- Snooze Dialog -->
+	<string-array name="snooze_dialog_data_text">
+		<item>Indefinitely</item>
+		<item>1 hour</item>
+		<item>2 hours</item>
+		<item>4 hours</item>
+		<item>8 hours</item>
+		<item>1 day</item>
+		<item>2 days</item>
+		<item>3 days</item>
+	</string-array>
+
+</resources>

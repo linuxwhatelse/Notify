@@ -1,0 +1,112 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+		  package="de.linuxwhatelse.android.notify">
+
+	<uses-permission android:name="com.android.vending.BILLING"/>
+	<uses-permission android:name="android.permission.INTERNET"/>
+	<uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+	<uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
+
+	<uses-permission
+			android:name="android.permission.CAMERA"
+			android:required="false"/>
+
+	<uses-feature
+			android:name="android.hardware.telephony"
+			android:required="false"/>
+
+	<uses-permission
+			android:name="android.permission.READ_PHONE_STATE"
+			android:required="false"/>
+
+	<uses-permission
+			android:name="android.permission.PROCESS_OUTGOING_CALLS"
+			android:required="false"/>
+
+	<application
+			android:allowBackup="true"
+			android:icon="@mipmap/ic_launcher"
+			android:theme="@style/AppTheme.Dark"
+			android:label="@string/app_name">
+
+		<activity
+            android:name=".activities.MainActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="@string/app_name"
+            android:launchMode="singleTop">
+			<intent-filter>
+				<action android:name="android.intent.action.MAIN"/>
+
+				<category android:name="android.intent.category.LAUNCHER"/>
+			</intent-filter>
+		</activity>
+
+		<activity
+            android:name=".activities.QRCodeScannerActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="@string/app_name"
+            android:launchMode="singleTop"/>
+		<activity
+            android:name=".activities.ApplicationsActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="@string/app_name"
+            android:launchMode="singleTop"/>
+		<activity
+            android:name=".activities.EventsPreferenceActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="@string/app_name"
+            android:launchMode="singleTop"/>
+		<activity
+            android:name=".activities.ClientPreferenceActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="@string/app_name"
+            android:launchMode="singleTop"/>
+
+		<activity
+            android:name=".activities.AboutPreferenceActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="@string/app_name"
+            android:launchMode="singleTop"/>
+
+        <activity
+            android:name=".activities.PreferenceActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="@string/app_name"
+            android:launchMode="singleTop"/>
+
+		<service
+            android:name=".services.NLService"
+            android:label="@string/app_name"
+            android:permission="android.permission.BIND_NOTIFICATION_LISTENER_SERVICE">
+			<intent-filter>
+				<action android:name="android.service.notification.NotificationListenerService"/>
+			</intent-filter>
+		</service>
+
+		<receiver
+            android:name=".receiver.SnoozeEndReceiver"
+            android:enabled="true"
+            android:exported="true">
+        </receiver>
+
+
+		<receiver android:name=".receiver.OnBootCompleteReceiver">
+			<intent-filter>
+				<action android:name="android.intent.action.MY_PACKAGE_REPLACED"/>
+				<action android:name="android.intent.action.BOOT_COMPLETED"/>
+			</intent-filter>
+		</receiver>
+
+		<receiver
+            android:name=".receiver.CallReceiver"
+            android:enabled="true">
+			<intent-filter>
+				<action android:name="android.intent.action.PHONE_STATE"/>
+			</intent-filter>
+			<intent-filter>
+				<action android:name="android.intent.action.NEW_OUTGOING_CALL"/>
+			</intent-filter>
+		</receiver>
+
+	</application>
+
+</manifest>

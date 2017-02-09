@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+	<SwitchPreference
+		android:key="client_preference_enabled"
+		android:persistent="false"
+		android:defaultValue="true"
+		android:title="@string/client_preference_enable"/>
+
+	<PreferenceCategory android:title="@string/client_preference_category_connection">
+		<EditTextPreference
+				android:key="client_preference_name"
+				android:persistent="false"
+				android:defaultValue=""
+				android:title="@string/client_preference_category_connection_client_name" />
+		<EditTextPreference
+				android:key="client_preference_host"
+				android:persistent="false"
+				android:defaultValue=""
+				android:title="@string/client_preference_category_connection_host" />
+		<EditTextPreference
+				android:key="client_preference_port"
+				android:persistent="false"
+				android:numeric="integer"
+				android:title="@string/client_preference_category_connection_port" />
+		<EditTextPreference
+				android:key="client_preference_user"
+				android:persistent="false"
+				android:defaultValue=""
+				android:title="@string/client_preference_category_connection_user" />
+		<EditTextPreference
+				android:key="client_preference_pwd"
+				android:persistent="false"
+				android:defaultValue=""
+				android:inputType="textPassword"
+				android:title="@string/client_preference_category_connection_pwd" />
+		<EditTextPreference
+				android:key="client_preference_ssid"
+				android:persistent="false"
+				android:defaultValue=""
+				android:title="@string/client_preference_category_connection_ssid" />
+	</PreferenceCategory>
+
+
+	<PreferenceCategory android:title="@string/client_preference_category_notification">
+		<CheckBoxPreference
+				android:key="client_preference_notification_overwrite_global"
+				android:persistent="false"
+				android:defaultValue="false"
+				android:title="@string/client_preference_category_notification_overwrite_global"
+				android:summary="@string/client_preference_category_notification_overwrite_global_summary" />
+		<Preference
+				android:key="client_preference_notification_notifications"
+				android:dependency="client_preference_notification_overwrite_global"
+				android:title="@string/client_preference_category_notification_notifications" />
+	</PreferenceCategory>
+
+
+	<PreferenceCategory android:title="@string/client_preference_category_events">
+		<CheckBoxPreference
+				android:key="client_preference_event_overwrite_global"
+				android:persistent="false"
+				android:defaultValue="false"
+				android:title="@string/client_preference_category_event_overwrite_global"
+				android:summary="@string/client_preference_category_events_overwrite_global_summary" />
+		<Preference
+				android:key="client_preference_event_events"
+				android:dependency="client_preference_event_overwrite_global"
+				android:title="@string/client_preference_category_event_events" />
+	</PreferenceCategory>
+</PreferenceScreen>

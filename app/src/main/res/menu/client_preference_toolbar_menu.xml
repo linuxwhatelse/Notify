@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+	  xmlns:notify="http://schemas.android.com/apk/res-auto">
+
+	<item
+			android:id="@+id/client_preference_toolbar_menu_delete"
+			android:title="@string/client_preference_toolbar_menu_delete"
+			android:icon="@drawable/ic_delete"
+			android:orderInCategory="100"
+			notify:showAsAction="ifRoom"/>
+</menu>

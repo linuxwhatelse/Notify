@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group
+        android:id="@+id/navdrawer_group_main"
+        android:checkableBehavior="single">
+        <item
+            android:id="@+id/navdrawer_apps"
+            android:icon="@drawable/ic_apps"
+            android:checked="true"
+            android:title="@string/navdrawer_apps" />
+        <item
+            android:id="@+id/navdrawer_events"
+            android:icon="@drawable/ic_notifications_none"
+            android:title="@string/navdrawer_events" />
+        <item
+            android:id="@+id/navdrawer_devices"
+            android:icon="@drawable/ic_computer"
+            android:title="@string/navdrawer_devices" />
+    </group>
+
+    <group
+        android:id="@+id/navdrawer_group_snooze"
+        android:checkableBehavior="none">
+        <item
+            android:id="@+id/navdrawer_snooze_notifications_only"
+            android:icon="@drawable/ic_notifications_paused"
+            android:title="@string/navdrawer_snooze_notifications_only" />
+        <item
+            android:id="@+id/navdrawer_snooze_all_events"
+            android:icon="@drawable/ic_notifications_paused"
+            android:title="@string/navdrawer_snooze_all_events" />
+    </group>
+
+    <group
+        android:id="@+id/navdrawer_group_other"
+        android:checkableBehavior="none">
+        <item
+            android:id="@+id/navdrawer_donate"
+            android:icon="@drawable/ic_account_balance_wallet"
+            android:title="@string/navdrawer_donate" />
+        <item
+            android:id="@+id/navdrawer_about"
+            android:icon="@drawable/ic_help"
+            android:title="@string/navdrawer_about" />
+        <item
+            android:id="@+id/navdrawer_settings"
+            android:icon="@drawable/ic_settings"
+            android:title="@string/navdrawer_settings" />
+    </group>
+
+</menu>
