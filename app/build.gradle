@@ -30,7 +30,7 @@ dependencies {
     compile "com.android.support:support-v4:${supportLibVersion}"
     compile "com.android.support:design:${supportLibVersion}"
 
-    compile 'com.anjlab.android.iab.v3:library:1.0.19'
+    compile 'com.anjlab.android.iab.v3:library:1.0.38'
     compile 'com.github.clans:fab:1.6.4'
     compile 'me.dm7.barcodescanner:zbar:1.9'
 }
