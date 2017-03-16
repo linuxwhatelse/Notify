@@ -222,7 +222,7 @@ public class MainActivity extends ThemedAppCompatActivity
                 .setContentText(getString(R.string.notification_text))
                 .setStyle(new NotificationCompat.BigTextStyle().bigText(getString(R.string.notification_text)))
                 .setSmallIcon(R.drawable.ic_textsms)
-                .setPriority(NotificationCompat.PRIORITY_MIN);
+                .setPriority(NotificationCompat.PRIORITY_DEFAULT);
 
         notificationManager.notify(Notify.NOTIFICATION_ID_TEST, mBuilder.build());
     }
