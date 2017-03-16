@@ -12,6 +12,7 @@ import android.preference.PreferenceManager;
 import android.service.notification.NotificationListenerService;
 import android.service.notification.StatusBarNotification;
 import android.support.v4.app.NotificationCompat;
+import android.util.Log;
 
 import java.util.ArrayList;
 
@@ -45,8 +46,6 @@ public class NLService extends NotificationListenerService {
 
     @Override
     public void onNotificationPosted(StatusBarNotification sbn) {
-        NotifyNotification noti = new NotifyNotification(getApplicationContext(), sbn);
-
         if (isOngoing(sbn.getNotification()))
             return;
 
@@ -57,6 +56,7 @@ public class NLService extends NotificationListenerService {
         if (clients.size() <= 0)
             return;
 
+        NotifyNotification noti = new NotifyNotification(getApplicationContext(), sbn);
         Publisher.send(getApplicationContext(), clients, Notify.PATH_NOTIFICATION_POSTED, noti.getAsJSON());
     }
 

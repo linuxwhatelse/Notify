@@ -25,10 +25,14 @@ import java.io.ByteArrayOutputStream;
  */
 public class NotifyNotification {
     private Context context;
+    private StatusBarNotification sbn;
+    private Notification notification;
+    private Bundle notificationExtras;
 
     private int id;
     private String appName;
-    private String appPackage;
+    private String packageName;
+    private int priority;
     private String title;
     private String text;
     private String bigText;
@@ -41,142 +45,33 @@ public class NotifyNotification {
     private String smallIcon;
     private Notification.Action[] actions;
 
-    public NotifyNotification() {
-    }
 
     public NotifyNotification(Context context, StatusBarNotification sbn) {
         this.context = context;
 
-        Notification mNotification = sbn.getNotification();
+        this.sbn = sbn;
+        this.notification = sbn.getNotification();
+        this.notificationExtras = this.notification.extras;
 
-        Bundle extras = mNotification.extras;
+        String largeIcon = getBase64EncodedIcon((Bitmap) this.notificationExtras.getParcelable(Notification.EXTRA_LARGE_ICON));
 
-        String largeIcon = getBase64EncodedIcon((Bitmap) extras.getParcelable(Notification.EXTRA_LARGE_ICON));
+        this.id = sbn.getId();
+        this.appName = getAppName();
+        this.packageName = sbn.getPackageName();
+        this.priority = this.notification.priority;
 
-        this.setId(sbn.getId());
-        this.setAppName(getAppName(sbn));
-
-        ;
-        this.setTitle(extras.getCharSequence(Notification.EXTRA_TITLE, "").toString());
-        this.setText(extras.getCharSequence(Notification.EXTRA_TEXT, "").toString());
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            this.setBigText(extras.getCharSequence(Notification.EXTRA_BIG_TEXT, "").toString());
-        } else {
-            this.setBigText("");
-        }
-        this.setInfoText(extras.getCharSequence(Notification.EXTRA_INFO_TEXT, "").toString());
-        this.setTickerText((mNotification.tickerText != null) ? mNotification.tickerText.toString() : "");
-        this.setSubText(extras.getCharSequence(Notification.EXTRA_SUB_TEXT, "").toString());
-        this.setDisplayTime(5000);
-        this.setLargeIcon(largeIcon);
-        this.setAppIcon(getApplicationIcon(sbn));
-        this.setSmallIcon(getNotificationSmallIcon(sbn, extras));
-        this.setActions(mNotification.actions);
-
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getAppName() {
-        return appName;
-    }
-
-    public void setAppName(String appName) {
-        this.appName = appName;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public String getText() {
-        return text;
-    }
-
-    public void setText(String text) {
-        this.text = text;
-    }
-
-    public String getBigText() {
-        return bigText;
-    }
-
-    public void setBigText(String bigText) {
-        this.bigText = bigText;
-    }
-
-    public String getInfoText() {
-        return infoText;
-    }
-
-    public void setInfoText(String infoText) {
-        this.infoText = infoText;
-    }
-
-    public String getTickerText() {
-        return tickerText;
-    }
-
-    public void setTickerText(String tickerText) {
-        this.tickerText = tickerText;
-    }
-
-    public String getSubText() {
-        return subText;
-    }
-
-    public void setSubText(String subText) {
-        this.subText = subText;
-    }
-
-    public int getDisplayTime() {
-        return displayTime;
-    }
-
-    public void setDisplayTime(int displayTime) {
-        this.displayTime = displayTime;
-    }
-
-    public String getLargeIcon() {
-        return largeIcon;
-    }
-
-    public void setLargeIcon(String largeIcon) {
+        this.title = this.notificationExtras.getCharSequence(Notification.EXTRA_TITLE, "").toString();
+        this.text = this.notificationExtras.getCharSequence(Notification.EXTRA_TEXT, "").toString();
+        this.bigText = this.notificationExtras.getCharSequence(Notification.EXTRA_BIG_TEXT, "").toString();
+        this.infoText = this.notificationExtras.getCharSequence(Notification.EXTRA_INFO_TEXT, "").toString();
+        this.tickerText = (this.notification.tickerText != null) ? this.notification.tickerText.toString() : "";
+        this.subText = this.notificationExtras.getCharSequence(Notification.EXTRA_SUB_TEXT, "").toString();
+        this.displayTime = 5000;
         this.largeIcon = largeIcon;
-    }
+        this.appIcon = getApplicationIcon();
+        this.smallIcon = getNotificationSmallIcon();
+        this.actions = this.notification.actions;
 
-    public String getAppIcon() {
-        return appIcon;
-    }
-
-    public void setAppIcon(String appIcon) {
-        this.appIcon = appIcon;
-    }
-
-    public String getSmallIcon() {
-        return smallIcon;
-    }
-
-    public void setSmallIcon(String smallIcon) {
-        this.smallIcon = smallIcon;
-    }
-
-    public Notification.Action[] getActions() {
-        return this.actions;
-    }
-
-    public void setActions(Notification.Action[] actions) {
-        this.actions = actions;
     }
 
     public JSONObject getAsJSON() {
@@ -185,25 +80,27 @@ public class NotifyNotification {
         try {
             JSONObject largeIcon = new JSONObject();
             largeIcon.put("mimetype", "image/png");
-            largeIcon.put("data", this.getLargeIcon());
+            largeIcon.put("data", this.largeIcon);
 
             JSONObject appIcon = new JSONObject();
             appIcon.put("mimetype", "image/png");
-            appIcon.put("data", this.getAppIcon());
+            appIcon.put("data", this.appIcon);
 
             JSONObject smallIcon = new JSONObject();
             smallIcon.put("mimetype", "image/png");
-            smallIcon.put("data", this.getSmallIcon());
+            smallIcon.put("data", this.smallIcon);
 
-            jsonObject.put("id", this.getId());
-            jsonObject.put("appName", this.getAppName());
-            jsonObject.put("title", this.getTitle());
-            jsonObject.put("text", this.getText());
-            jsonObject.put("bigText", this.getBigText());
-            jsonObject.put("infoText", this.getInfoText());
-            jsonObject.put("tickerText", this.getTickerText());
-            jsonObject.put("subText", this.getSubText());
-            jsonObject.put("displayTime", this.getDisplayTime());
+            jsonObject.put("id", this.id);
+            jsonObject.put("appName", this.appName);
+            jsonObject.put("packageName", this.packageName);
+            jsonObject.put("priority", this.priority);
+            jsonObject.put("title", this.title);
+            jsonObject.put("text", this.text);
+            jsonObject.put("bigText", this.bigText);
+            jsonObject.put("infoText", this.infoText);
+            jsonObject.put("tickerText", this.tickerText);
+            jsonObject.put("subText", this.subText);
+            jsonObject.put("displayTime", this.displayTime);
             jsonObject.put("largeIcon", largeIcon);
             jsonObject.put("appIcon", appIcon);
             jsonObject.put("smallIcon", smallIcon);
@@ -219,7 +116,7 @@ public class NotifyNotification {
      * Helper functions to convert a
      * StatusBarNotification to a NotifyNontification
      */
-    private String getAppName(StatusBarNotification sbn) {
+    private String getAppName() {
         String appName;
         try {
             ApplicationInfo applicationInfo = this.context.createPackageContext(sbn.getPackageName(), Context.CONTEXT_IGNORE_SECURITY).getApplicationInfo();
@@ -231,10 +128,10 @@ public class NotifyNotification {
         return appName;
     }
 
-    private String getNotificationSmallIcon(StatusBarNotification sbn, Bundle extras) {
+    private String getNotificationSmallIcon() {
         String smallIcon = "";
 
-        int smallIconResource = extras.getInt(Notification.EXTRA_SMALL_ICON);
+        int smallIconResource = this.notificationExtras.getInt(Notification.EXTRA_SMALL_ICON);
 
         Context packageContext = null;
         try {
@@ -254,7 +151,7 @@ public class NotifyNotification {
         return smallIcon;
     }
 
-    private String getApplicationIcon(StatusBarNotification sbn) {
+    private String getApplicationIcon() {
         String applicationIcon = "";
 
         try {
