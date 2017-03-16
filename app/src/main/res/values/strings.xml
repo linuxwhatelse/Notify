@@ -1,14 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 	<string name="app_name">Notify</string>
+	<string name="app_running">Running</string>
 
 	<!-- Toasts, Dialogs, Listview-Emptytext etc. -->
 	<string name="not_implemented_yet">Not implemented yet</string>
 
-	<string name="notification_title">Do you like my app?</string>
-	<string name="notification_ticker_text">Notify test-notification</string>
-	<string name="notification_text">Why don\'t give a small donation than? It will help further development and really means a lot to me</string>
-	<string name="notification_big_text">Why don\'t give a small donation than? It will help further development and really means a lot to me</string>
+	<string name="notification_title">Like the app?</string>
+	<string name="notification_text">If so, you could donate if you want. Just saying :)</string>
 
 	<string name="message_listview_clients_empty">You haven\&#39;t added a client yet.</string>
 	<string name="message_activate_notification_access">For this app to work you have to enable it in "Notification Access"</string>
@@ -77,8 +76,15 @@
 	<string name="events_preference_call_summary">Notify all clients about call events (incoming-, outgoing-, missed calls)</string>
 
     <!-- Preferences -->
+	<string name="preference_category_interface">Interface</string>
+	<string name="preference_category_advanced">Advanced</string>
+
     <string name="preference_dark_theme">Dark theme</string>
-    <string name="preference_theme_summary">For this change to take affect you have to restart the app</string>
+    <string name="preference_theme_summary">For this change to take affect you have to restart the app.</string>
+
+	<string name="preference_foreground">Run in foreground</string>
+	<string name="preference_foreground_summary">If after some time notification don\'t get forwarded anymore, try enabling this.</string>
+
 
 	<!-- About -->
 	<string name="about_version">Version</string>

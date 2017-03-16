@@ -27,6 +27,9 @@ public class Notify {
 
 
     // SharedPreferences-Keys
+    public final static String PREFERENCE_KEY_DARK_THEME = "preference_dark_theme";
+    public final static String PREFERENCE_KEY_FOREGROUND = "preference_foreground";
+
     public final static String PREFERENCE_KEY_NOTIFICATIONS_SNOOZED = "notifications_snoozed";
     public final static String PREFERENCE_KEY_EVENTS_SNOOZED = "events_snoozed";
     public final static String PREFERENCE_KEY_SNOOZED_UNTIL = "snoozed_until";

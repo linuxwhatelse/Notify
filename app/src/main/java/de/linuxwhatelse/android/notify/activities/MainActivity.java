@@ -221,9 +221,9 @@ public class MainActivity extends ThemedAppCompatActivity
 
         NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(this)
                 .setContentTitle(getString(R.string.notification_title))
+                .setTicker(getString(R.string.notification_title))
                 .setContentText(getString(R.string.notification_text))
-                .setTicker(getString(R.string.notification_ticker_text))
-                .setStyle(new NotificationCompat.BigTextStyle().bigText(getString(R.string.notification_big_text)))
+                .setStyle(new NotificationCompat.BigTextStyle().bigText(getString(R.string.notification_text)))
                 .setSmallIcon(R.drawable.ic_textsms)
                 .setPriority(NotificationCompat.PRIORITY_LOW);
 

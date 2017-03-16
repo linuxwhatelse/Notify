@@ -1,10 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
-	<SwitchPreference
-        android:key="preference_dark_theme"
-        android:defaultValue="true"
-        android:title="@string/preference_dark_theme"
-        android:summary="@string/preference_theme_summary"/>
+	<PreferenceCategory android:title="@string/preference_category_interface">
+		<SwitchPreference
+			android:key="preference_dark_theme"
+			android:defaultValue="true"
+			android:title="@string/preference_dark_theme"
+			android:summary="@string/preference_theme_summary"/>
+	</PreferenceCategory>
+
+	<PreferenceCategory android:title="@string/preference_category_advanced">
+		<SwitchPreference
+			android:key="preference_foreground"
+			android:defaultValue="false"
+			android:title="@string/preference_foreground"
+			android:summary="@string/preference_foreground_summary"/>
+	</PreferenceCategory>
 
 </PreferenceScreen>
