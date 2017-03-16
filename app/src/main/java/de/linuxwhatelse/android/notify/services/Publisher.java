@@ -33,7 +33,6 @@ public class Publisher extends AsyncTask<Object, Void, Void> {
         for (Client client : clients) {
             Publisher sender = new Publisher(context);
 
-            Log.d(Publisher.class.getName(), "Sending to: " + client.getName());
             sender.execute(client, path, data);
         }
     }
@@ -86,6 +85,8 @@ public class Publisher extends AsyncTask<Object, Void, Void> {
         }
 
         try {
+            Log.d(Publisher.class.getName(), "Sending to: " + client.getName());
+
             byte[] data = jsonObject.toString().getBytes();
 
             URL url = new URL("http://" + client.getHost() + ":" + client.getPort() + path);
