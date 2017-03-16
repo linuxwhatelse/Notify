@@ -13,6 +13,7 @@ public class EventsDataSource {
     private SQLiteDatabase database;
     private SQLiteHelper dbHelper;
     private String[] allColumns = {SQLiteHelper.COLUMN_EVENTS_CLIENT_ID, SQLiteHelper.COLUMN_EVENTS_EVENT_TYPE};
+
     public EventsDataSource(Context context) {
         dbHelper = new SQLiteHelper(context);
         database = dbHelper.getWritableDatabase();

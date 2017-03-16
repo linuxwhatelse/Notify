@@ -5,25 +5,18 @@ package de.linuxwhatelse.android.notify.activities;
  */
 
 import android.Manifest;
-import android.app.Activity;
 import android.app.FragmentTransaction;
-import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
 import de.linuxwhatelse.android.notify.R;
-import de.linuxwhatelse.android.notify.fragments.AboutPreferenceFragment;
-import de.linuxwhatelse.android.notify.fragments.ClientsFragment;
 import de.linuxwhatelse.android.notify.fragments.QRCodeScannerFragment;
-import me.dm7.barcodescanner.zbar.Result;
-import me.dm7.barcodescanner.zbar.ZBarScannerView;
 
-public class QRCodeScannerActivity extends ThemedAppCompatActivity  {
+public class QRCodeScannerActivity extends ThemedAppCompatActivity {
     private final int CAMERA_PERMISSION_REQUEST = 1;
 
     @Override
@@ -66,7 +59,7 @@ public class QRCodeScannerActivity extends ThemedAppCompatActivity  {
     }
 
     @Override
-    public void onRequestPermissionsResult(int requestCode,  String permissions[], int[] grantResults) {
+    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
         switch (requestCode) {
             case CAMERA_PERMISSION_REQUEST: {
                 // If request is cancelled, the result arrays are empty.

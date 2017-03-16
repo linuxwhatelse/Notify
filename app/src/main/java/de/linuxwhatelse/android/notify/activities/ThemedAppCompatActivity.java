@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 
 import de.linuxwhatelse.android.notify.Notify;
 import de.linuxwhatelse.android.notify.R;

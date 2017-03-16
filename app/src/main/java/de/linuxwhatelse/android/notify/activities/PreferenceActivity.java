@@ -2,12 +2,10 @@ package de.linuxwhatelse.android.notify.activities;
 
 import android.app.FragmentTransaction;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
 import de.linuxwhatelse.android.notify.R;
-import de.linuxwhatelse.android.notify.fragments.EventsPreferenceFragment;
 import de.linuxwhatelse.android.notify.fragments.PreferenceFragment;
 
 /**

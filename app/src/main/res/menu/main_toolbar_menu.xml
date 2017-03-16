@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
-	  xmlns:notify="http://schemas.android.com/apk/res-auto">
+    xmlns:notify="http://schemas.android.com/apk/res-auto">
 
-	<item
-			android:id="@+id/main_toolbar_menu_testnotification"
-			android:title="@string/main_toolbar_menu_test_notification"
-			android:icon="@drawable/ic_textsms"
-			android:orderInCategory="90"
-			notify:showAsAction="ifRoom"/>
+    <item
+        android:id="@+id/main_toolbar_menu_testnotification"
+        android:title="@string/main_toolbar_menu_test_notification"
+        android:icon="@drawable/ic_textsms"
+        android:orderInCategory="90"
+        notify:showAsAction="ifRoom" />
 
 </menu>

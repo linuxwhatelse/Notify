@@ -1,14 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:fab="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-	<include layout="@android:layout/list_content" />
+    <include layout="@android:layout/list_content" />
 
-	<com.github.clans.fab.FloatingActionMenu
-		android:id="@+id/clients_listview_fab"
+    <com.github.clans.fab.FloatingActionMenu
+        android:id="@+id/clients_listview_fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
@@ -23,11 +22,11 @@
         fab:menu_labels_colorPressed="?android:attr/colorPrimaryDark"
         fab:menu_labels_colorRipple="?android:attr/colorControlHighlight">
 
-		<com.github.clans.fab.FloatingActionButton
-			android:id="@+id/clients_listview_fab_action_manually"
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:src="@drawable/ic_mode_edit_fab"
+        <com.github.clans.fab.FloatingActionButton
+            android:id="@+id/clients_listview_fab_action_manually"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_mode_edit_fab"
             android:tint="?attr/textColorFAB"
             fab:fab_colorNormal="?android:attr/colorPrimary"
             fab:fab_colorPressed="?android:attr/colorPrimaryDark"
@@ -45,7 +44,7 @@
             fab:fab_colorPressed="?android:attr/colorPrimaryDark"
             fab:fab_colorRipple="?android:attr/colorControlHighlight"
             fab:fab_size="mini"
-            fab:fab_label="@string/fab_add_via_qr_code"/>
-	</com.github.clans.fab.FloatingActionMenu>
+            fab:fab_label="@string/fab_add_via_qr_code" />
+    </com.github.clans.fab.FloatingActionMenu>
 
 </FrameLayout>

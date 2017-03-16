@@ -1,29 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
-	<Preference
-			android:key="about_version"
-			android:persistent="false"
-			android:title="@string/about_version" />
+    <Preference
+        android:key="about_version"
+        android:persistent="false"
+        android:title="@string/about_version" />
 
-	<Preference
-			android:key="about_licenses"
-			android:persistent="false"
-			android:title="@string/about_licenses" />
+    <Preference
+        android:key="about_licenses"
+        android:persistent="false"
+        android:title="@string/about_licenses" />
 
-	<Preference
-			android:key="about_google_plus"
-			android:persistent="false"
-			android:title="@string/about_lwe_google_plus" />
-	<Preference
-			android:key="about_github"
-			android:persistent="false"
-			android:defaultValue=""
-			android:title="@string/about_lwe_github" />
-	<Preference
-			android:key="about_homepage"
-			android:persistent="false"
-			android:numeric="integer"
-			android:title="@string/about_lwe_homepage" />
+    <Preference
+        android:key="about_google_plus"
+        android:persistent="false"
+        android:title="@string/about_lwe_google_plus" />
+    <Preference
+        android:key="about_github"
+        android:persistent="false"
+        android:defaultValue=""
+        android:title="@string/about_lwe_github" />
+    <Preference
+        android:key="about_homepage"
+        android:persistent="false"
+        android:numeric="integer"
+        android:title="@string/about_lwe_homepage" />
 
 </PreferenceScreen>

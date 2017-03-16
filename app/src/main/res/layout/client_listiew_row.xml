@@ -1,56 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<RelativeLayout
-	xmlns:android="http://schemas.android.com/apk/res/android"
-	xmlns:tools="http://schemas.android.com/tools"
-	android:scrollbars="vertical"
-	android:minHeight="72dp"
-	android:layout_width="match_parent"
-	android:layout_height="72dp" >
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:scrollbars="vertical"
+    android:minHeight="72dp"
+    android:layout_width="match_parent"
+    android:layout_height="72dp">
 
-	<ImageView
-		android:id="@+id/client_listview_row_icon"
-		android:src="@drawable/ic_computer"
-		android:tint="?android:attr/textColorPrimary"
-		android:layout_marginStart="16dp"
-		android:layout_width="40dp"
-		android:layout_height="40dp"
-		android:layout_centerVertical="true"
-		android:layout_alignParentStart="true" />
+    <ImageView
+        android:id="@+id/client_listview_row_icon"
+        android:src="@drawable/ic_computer"
+        android:tint="?android:attr/textColorPrimary"
+        android:layout_marginStart="16dp"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_centerVertical="true"
+        android:layout_alignParentStart="true" />
 
-	<Switch
-		android:id="@+id/client_listview_row_activate"
-		android:layout_width="wrap_content"
-		android:layout_height="wrap_content"
-		android:focusable="false"
-		android:focusableInTouchMode="false"
-		android:layout_marginEnd="16dp"
-		android:layout_marginStart="16dp"
-		android:layout_centerVertical="true"
-		android:layout_alignParentEnd="true" />
+    <Switch
+        android:id="@+id/client_listview_row_activate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:focusable="false"
+        android:focusableInTouchMode="false"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_centerVertical="true"
+        android:layout_alignParentEnd="true" />
 
-	<LinearLayout
-		android:orientation="vertical"
-		android:layout_width="match_parent"
-		android:layout_height="wrap_content"
-		android:layout_marginStart="72dp"
-		android:layout_centerVertical="true"
-		android:layout_toStartOf="@+id/client_listview_row_activate">
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="72dp"
+        android:layout_centerVertical="true"
+        android:layout_toStartOf="@+id/client_listview_row_activate">
 
-		<TextView
-			tools:text="Livingroom"
-			android:layout_width="match_parent"
-			android:layout_height="wrap_content"
-			android:textSize="16sp"
-			android:id="@+id/client_listview_row_name"/>
+        <TextView
+            tools:text="Livingroom"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:id="@+id/client_listview_row_name" />
 
-		<TextView
-			tools:text="192.168.178.1:8080"
-			android:layout_width="match_parent"
-			android:layout_height="wrap_content"
-			android:textSize="16sp"
-			android:id="@+id/client_listview_row_host"/>
+        <TextView
+            tools:text="192.168.178.1:8080"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:id="@+id/client_listview_row_host" />
 
 
-	</LinearLayout>
+    </LinearLayout>
 </RelativeLayout>

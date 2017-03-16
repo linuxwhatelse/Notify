@@ -1,15 +1,10 @@
 package de.linuxwhatelse.android.notify.fragments;
 
 import android.os.Bundle;
-import android.preference.CheckBoxPreference;
 import android.preference.Preference;
-import android.preference.SwitchPreference;
 import android.support.v7.app.AppCompatActivity;
-import android.widget.Switch;
-import android.widget.Toast;
 
 import de.linuxwhatelse.android.notify.R;
-import de.linuxwhatelse.android.notify.database.EventsDataSource;
 
 /**
  * Created by tadly on 12/31/14.
