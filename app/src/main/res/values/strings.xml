@@ -6,6 +6,9 @@
     <!-- Toasts, Dialogs, Listview-Emptytext etc. -->
     <string name="not_implemented_yet">Not implemented yet</string>
 
+    <string name="notification_channel_test">Test Notificaton</string>
+    <string name="notification_channel_snooze">Snooze</string>
+
     <string name="notification_title">Like the app?</string>
     <string name="notification_text">If so, you could donate if you want. Just saying :)</string>
 

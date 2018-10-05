@@ -2,11 +2,15 @@ package de.linuxwhatelse.android.notify.activities;
 
 import android.Manifest;
 import android.app.FragmentTransaction;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.ContentResolver;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.provider.Settings;
@@ -14,7 +18,6 @@ import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.NotificationCompat;
-import android.support.v4.app.NotificationManagerCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -212,23 +215,44 @@ public class MainActivity extends ThemedAppCompatActivity
         return !(enabledNotificationListeners == null || !enabledNotificationListeners.contains(packageName));
     }
 
+    private void initChannels(Context context, String channelName) {
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.O) {
+            return;
+        }
+
+        NotificationManager notificationManager =
+                (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+        NotificationChannel channel = new NotificationChannel(Notify.NOTIFICATION_CHANNEL,
+                channelName, NotificationManager.IMPORTANCE_LOW);
+        notificationManager.createNotificationChannel(channel);
+    }
+
     private void createTestNotification() {
-        NotificationManagerCompat notificationManager = NotificationManagerCompat.from(this);
+        this.initChannels(this, getString(R.string.notification_channel_test));
+
+        NotificationManager notificationManager =
+                (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
         notificationManager.cancel(Notify.NOTIFICATION_ID_TEST);
 
-        NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(this)
+        NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(this,
+                Notify.NOTIFICATION_CHANNEL)
                 .setContentTitle(getString(R.string.notification_title))
                 .setTicker(getString(R.string.notification_title))
                 .setContentText(getString(R.string.notification_text))
-                .setStyle(new NotificationCompat.BigTextStyle().bigText(getString(R.string.notification_text)))
+                .setStyle(new NotificationCompat.BigTextStyle().bigText(
+                        getString(R.string.notification_text)))
                 .setSmallIcon(R.drawable.ic_textsms)
                 .setPriority(NotificationCompat.PRIORITY_DEFAULT);
+
 
         notificationManager.notify(Notify.NOTIFICATION_ID_TEST, mBuilder.build());
     }
 
     private void handleSnoozedNotification() {
-        NotificationManagerCompat notificationManager = NotificationManagerCompat.from(this);
+        this.initChannels(this, getString(R.string.notification_channel_snooze));
+
+        NotificationManager notificationManager =
+                (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
 
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
 
@@ -241,14 +265,12 @@ public class MainActivity extends ThemedAppCompatActivity
             return;
         }
 
-        String title;
+        String title = getString(R.string.snoozed_notifications_title);
         if (notificationsSnoozed && eventsSnoozed) {
             title = getString(R.string.snoozed_all_title);
-        } else {
-            title = getString(R.string.snoozed_notifications_title);
         }
 
-        String body;
+        String body = getString(R.string.snoozed_text_resume_indefinitely);
         if (snoozeUntil != -1) {
             Calendar cal = Calendar.getInstance();
             cal.setTimeInMillis(snoozeUntil);
@@ -256,15 +278,13 @@ public class MainActivity extends ThemedAppCompatActivity
             String time = (new SimpleDateFormat("HH:mm", getResources().getConfiguration().locale)).format(cal.getTime());
 
             body = getString(R.string.snoozed_text_resume_at) + " " + day + " " + time;
-        } else {
-            body = getString(R.string.snoozed_text_resume_indefinitely);
         }
 
         Intent activityIntent = new Intent(context, MainActivity.class);
         activityIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
         PendingIntent activityPendingIntent = PendingIntent.getActivity(context, 0, activityIntent, PendingIntent.FLAG_UPDATE_CURRENT);
 
-        NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(this)
+        NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(this, Notify.NOTIFICATION_CHANNEL)
                 .setContentTitle(title)
                 .setContentText(body)
                 .setSmallIcon(R.drawable.ic_notifications_paused)
@@ -281,7 +301,6 @@ public class MainActivity extends ThemedAppCompatActivity
         mBuilder.addAction(action);
 
         notificationManager.notify(Notify.NOTIFICATION_ID_SNOOZE, mBuilder.build());
-
     }
 
     @Override

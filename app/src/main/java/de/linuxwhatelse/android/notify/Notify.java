@@ -8,6 +8,8 @@ import android.net.Uri;
 public class Notify {
     public final static int NOTIFICATION_ID_TEST = 1337;
     public final static int NOTIFICATION_ID_SNOOZE = 1338;
+    public final static String NOTIFICATION_CHANNEL = "default";
+
 
     public final static String SNOOZE_NOTIFICATIONS = "snooze_notifications";
     public final static String SNOOZE_ALL = "snooze_all";

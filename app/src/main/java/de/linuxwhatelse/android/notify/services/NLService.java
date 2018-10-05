@@ -12,7 +12,6 @@ import android.preference.PreferenceManager;
 import android.service.notification.NotificationListenerService;
 import android.service.notification.StatusBarNotification;
 import android.support.v4.app.NotificationCompat;
-import android.util.Log;
 
 import java.util.ArrayList;
 
@@ -37,11 +36,16 @@ public class NLService extends NotificationListenerService {
         super.onCreate();
 
         this.preferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-
         this.preferences.registerOnSharedPreferenceChangeListener(preferenceChangeListener);
 
         boolean foreground = preferences.getBoolean(Notify.PREFERENCE_KEY_FOREGROUND, false);
         showForegroundNotification(foreground);
+    }
+
+    @Override
+    public void onDestroy() {
+        this.preferences.unregisterOnSharedPreferenceChangeListener(preferenceChangeListener);
+        super.onDestroy();
     }
 
     @Override
@@ -79,12 +83,6 @@ public class NLService extends NotificationListenerService {
         dataSource.close();
 
         return clients;
-    }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        this.preferences.unregisterOnSharedPreferenceChangeListener(preferenceChangeListener);
     }
 
     private SharedPreferences.OnSharedPreferenceChangeListener preferenceChangeListener = new SharedPreferences.OnSharedPreferenceChangeListener() {

@@ -84,8 +84,7 @@
         <receiver
             android:name=".receiver.SnoozeEndReceiver"
             android:enabled="true"
-            android:exported="true"></receiver>
-
+            android:exported="true"/>
 
         <receiver android:name=".receiver.OnBootCompleteReceiver">
             <intent-filter>

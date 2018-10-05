@@ -5,7 +5,6 @@ import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.os.AsyncTask;
 import android.util.Base64;
-import android.util.Log;
 
 import org.json.JSONObject;
 
@@ -22,56 +21,59 @@ import de.linuxwhatelse.android.notify.models.Client;
 /**
  * Created by tadly on 12/25/14.
  */
-public class Publisher extends AsyncTask<Object, Void, Void> {
+public class Publisher extends AsyncTask<Object, Void, Boolean> {
     Context context;
 
-    private Publisher(Context context) {
+    Client client;
+    String path;
+    JSONObject data;
+
+
+    public Publisher(Context context) {
         this.context = context;
     }
 
     public static void send(Context context, ArrayList<Client> clients, String path, JSONObject data) {
         for (Client client : clients) {
             Publisher sender = new Publisher(context);
-
             sender.execute(client, path, data);
         }
     }
 
     @Override
-    protected Void doInBackground(Object... params) {
-        if (params.length != 3) {
-            return null;
-        }
+    protected Boolean doInBackground(Object... params) {
+        if (params.length != 3)
+            return false;
 
-        Client client = (Client) params[0];
-        String path = (String) params[1];
-        JSONObject jsonObject = (JSONObject) params[2];
+        this.client = (Client) params[0];
+        this.path = (String) params[1];
+        this.data = (JSONObject) params[2];
 
         if (client == null)
-            return null;
+            return false;
 
         if (path == null || path.equals(""))
-            return null;
+            return false;
 
-        if (jsonObject == null)
-            return null;
+        if (data == null)
+            return false;
 
 
-        WifiManager wifiManager = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
+        WifiManager wifiManager = (WifiManager) context.getApplicationContext().getSystemService(Context.WIFI_SERVICE);
         WifiInfo wifiInfo = wifiManager.getConnectionInfo();
 
         // Verify if the current SSID is allowed and check whether or not the client is reachable
         if (!client.getAllowedSSID().equals("") && wifiInfo.getSSID() != null && !client.getAllowedSSID().equals(wifiInfo.getSSID().replace("\"", ""))) {
-            return null;
+            return false;
         }
 
         try {
             if (!InetAddress.getByName(client.getHost()).isReachable(1000)) {
-                return null;
+                return false;
             }
         } catch (IOException e) {
             e.printStackTrace();
-            return null;
+            return false;
         }
 
 
@@ -84,34 +86,33 @@ public class Publisher extends AsyncTask<Object, Void, Void> {
             }
         }
 
+        HttpURLConnection conn = null;
         try {
-            Log.d(Publisher.class.getName(), "Sending to: " + client.getName());
-
-            byte[] data = jsonObject.toString().getBytes();
-
             URL url = new URL("http://" + client.getHost() + ":" + client.getPort() + path);
-            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 
+            byte[] bytes = data.toString().getBytes();
+
+            conn = (HttpURLConnection) url.openConnection();
             conn.setDoOutput(true);
-            conn.setFixedLengthStreamingMode(data.length);
-
+            conn.setFixedLengthStreamingMode(bytes.length);
             conn.setRequestMethod("POST");
+            conn.setRequestProperty("Accept-Encoding", "identity");
             conn.setRequestProperty("Content-Type", "application/json; charset=utf-8");
             conn.setRequestProperty("Authorization", "Basic " + auth);
 
             BufferedOutputStream out = new BufferedOutputStream(conn.getOutputStream());
 
-            out.write(data);
+            out.write(bytes);
 
             out.flush();
             out.close();
 
-            conn.disconnect();
+            return true;
         } catch (IOException e) {
-            e.printStackTrace();
-            return null;
+            return false;
+        } finally {
+            assert conn != null;
+            conn.disconnect();
         }
-
-        return null;
     }
 }
