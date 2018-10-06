@@ -1,6 +1,9 @@
 package de.linuxwhatelse.android.notify.fragments;
 
+import android.Manifest;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.preference.CheckBoxPreference;
 import android.preference.EditTextPreference;
@@ -8,10 +11,14 @@ import android.preference.Preference;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceScreen;
 import android.preference.SwitchPreference;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import de.linuxwhatelse.android.notify.Notify;
 import de.linuxwhatelse.android.notify.R;
@@ -156,6 +163,25 @@ public class ClientPreferenceFragment extends PreferenceFragment implements Pref
                 eventsIntent.putExtra("client_id", clientId);
                 startActivity(eventsIntent);
                 break;
+            case "client_preference_ssid":
+                // Request location access
+                int permissionState = ContextCompat.checkSelfPermission(this.activity,
+                        Manifest.permission.ACCESS_COARSE_LOCATION);
+
+                if (permissionState != PackageManager.PERMISSION_GRANTED) {
+                    new AlertDialog.Builder(this.activity)
+                        .setTitle(getString(R.string.dialog_permission_title))
+                        .setMessage(getString(R.string.dialog_permission_location_msg))
+                        .setPositiveButton(getString(R.string.dialog_confirm), new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                ActivityCompat.requestPermissions(getActivity(),
+                                        new String[]{Manifest.permission.ACCESS_COARSE_LOCATION}, 1);
+                            }
+                        })
+                        .show();
+                }
+                break;
         }
 
         return true;
@@ -218,4 +244,5 @@ public class ClientPreferenceFragment extends PreferenceFragment implements Pref
 
         return true;
     }
+
 }

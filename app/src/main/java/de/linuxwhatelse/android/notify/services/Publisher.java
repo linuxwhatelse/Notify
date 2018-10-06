@@ -63,8 +63,13 @@ public class Publisher extends AsyncTask<Object, Void, Boolean> {
         WifiInfo wifiInfo = wifiManager.getConnectionInfo();
 
         // Verify if the current SSID is allowed and check whether or not the client is reachable
-        if (!client.getAllowedSSID().equals("") && wifiInfo.getSSID() != null && !client.getAllowedSSID().equals(wifiInfo.getSSID().replace("\"", ""))) {
-            return false;
+        if (!client.getAllowedSSID().equals("")) {
+            String ssid = wifiInfo.getSSID();
+
+            if (ssid != null &&
+                    !client.getAllowedSSID().equals(ssid.replace("\"", ""))) {
+                return false;
+            }
         }
 
         try {

@@ -40,6 +40,10 @@
     <string name="dialog_snooze_notifications_title">Snooze notifications for…</string>
     <string name="dialog_snooze_events_title">Snooze events for…</string>
 
+    <string name="dialog_permission_title">Permission required</string>
+    <string name="dialog_permission_location_msg">To access the current SSID, the location permission is required.</string>
+    <string name="dialog_confirm">OK</string>
+
     <!-- Navigation Drawer -->
     <string name="navdrawer_open">Open navigation drawer</string>
     <string name="navdrawer_close">Close navigation drawer</string>
