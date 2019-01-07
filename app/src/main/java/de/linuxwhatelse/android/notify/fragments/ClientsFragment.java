@@ -89,12 +89,12 @@ public class ClientsFragment extends ListFragment implements LoaderManager.Loade
         this.context = this;
 
         if (getView() != null) {
-            fabMenu = (FloatingActionMenu) getView().findViewById(R.id.clients_listview_fab);
+            fabMenu = getView().findViewById(R.id.clients_listview_fab);
 
-            fabManual = (FloatingActionButton) getView().findViewById(R.id.clients_listview_fab_action_manually);
+            fabManual = getView().findViewById(R.id.clients_listview_fab_action_manually);
             fabManual.setOnClickListener(onAddDeviceManuallyClickListener);
 
-            fabQRCode = (FloatingActionButton) getView().findViewById(R.id.clients_listview_fab_action_via_qr_code);
+            fabQRCode = getView().findViewById(R.id.clients_listview_fab_action_via_qr_code);
             fabQRCode.setOnClickListener(onAddDeviceViaQRCodeClickListener);
         }
 

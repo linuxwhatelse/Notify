@@ -3,7 +3,6 @@ package de.linuxwhatelse.android.notify.receiver;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
-import android.telephony.PhoneStateListener;
 import android.util.Log;
 
 import org.json.JSONException;

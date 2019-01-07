@@ -66,7 +66,7 @@ public class SnoozeDialogFragment extends DialogFragment implements ListView.OnI
                 android.R.layout.simple_list_item_1);
 
         View view = inflater.inflate(R.layout.snooze_dialog, container, false);
-        ListView listView = (ListView) view.findViewById(R.id.snooze_dialog_listview);
+        ListView listView = view.findViewById(R.id.snooze_dialog_listview);
 
         listView.setOnItemClickListener(this);
         listView.setAdapter(adapter);

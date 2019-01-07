@@ -49,6 +49,7 @@ public class EventsPreferenceFragment extends PreferenceFragment implements Pref
 
         this.callPreference.setChecked(callActive);
     }
+
     private void handleCallPermissions() {
         int readPhoneState = ContextCompat.checkSelfPermission(this.activity,
                 Manifest.permission.READ_PHONE_STATE);

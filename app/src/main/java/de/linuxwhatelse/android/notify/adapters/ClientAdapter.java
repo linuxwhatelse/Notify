@@ -36,9 +36,9 @@ public class ClientAdapter extends ArrayAdapter<Client> {
             rowView = inflater.inflate(R.layout.client_listiew_row, null);
 
             ViewHolder viewHolder = new ViewHolder();
-            viewHolder.clientName = (TextView) rowView.findViewById(R.id.client_listview_row_name);
-            viewHolder.clientHost = (TextView) rowView.findViewById(R.id.client_listview_row_host);
-            viewHolder.activate = (Switch) rowView.findViewById(R.id.client_listview_row_activate);
+            viewHolder.clientName = rowView.findViewById(R.id.client_listview_row_name);
+            viewHolder.clientHost = rowView.findViewById(R.id.client_listview_row_host);
+            viewHolder.activate = rowView.findViewById(R.id.client_listview_row_activate);
             viewHolder.activate.setOnClickListener(onClientActiveStateClickListener);
             rowView.setTag(viewHolder);
         }
@@ -95,4 +95,4 @@ public class ClientAdapter extends ArrayAdapter<Client> {
         }
     };
 
-};
+}

@@ -43,9 +43,9 @@ public class ApplicationAdapter extends ArrayAdapter<Application> implements Fil
             rowView = inflater.inflate(R.layout.apps_listiew_row, null);
 
             ViewHolder viewHolder = new ViewHolder();
-            viewHolder.appIcon = (ImageView) rowView.findViewById(R.id.application_listview_row_icon);
-            viewHolder.appName = (TextView) rowView.findViewById(R.id.application_listview_row_name);
-            viewHolder.active = (Switch) rowView.findViewById(R.id.application_listview_row_active);
+            viewHolder.appIcon = rowView.findViewById(R.id.application_listview_row_icon);
+            viewHolder.appName = rowView.findViewById(R.id.application_listview_row_name);
+            viewHolder.active = rowView.findViewById(R.id.application_listview_row_active);
             viewHolder.active.setOnClickListener(onAppActiveStateClickListener);
 
             rowView.setTag(viewHolder);
@@ -143,4 +143,4 @@ public class ApplicationAdapter extends ArrayAdapter<Application> implements Fil
             }
         }
     };
-};
+}

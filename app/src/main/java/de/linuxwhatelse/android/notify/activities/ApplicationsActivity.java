@@ -19,7 +19,7 @@ public class ApplicationsActivity extends ThemedAppCompatActivity {
 
         setContentView(R.layout.empty);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 

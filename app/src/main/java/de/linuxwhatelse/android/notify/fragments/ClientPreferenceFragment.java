@@ -18,7 +18,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.widget.Toast;
 
 import de.linuxwhatelse.android.notify.Notify;
 import de.linuxwhatelse.android.notify.R;
@@ -102,23 +101,27 @@ public class ClientPreferenceFragment extends PreferenceFragment implements Pref
             this.enabled.setChecked(client.isActive());
 
             this.name.setText(client.getName());
-            if (!client.getName().equals("")) this.name.setSummary(client.getName());
+            if (!client.getName().equals(""))
+                this.name.setSummary(client.getName());
 
             this.host.setText(client.getHost());
-            if (!client.getHost().equals("")) this.host.setSummary(client.getHost());
+            if (!client.getHost().equals(""))
+                this.host.setSummary(client.getHost());
 
             this.port.setText(String.valueOf(client.getPort()));
             this.port.setSummary(String.valueOf(client.getPort()));
 
             this.user.setText(client.getUser());
-            if (!client.getUser().equals("")) this.user.setSummary(client.getUser());
+            if (!client.getUser().equals(""))
+                this.user.setSummary(client.getUser());
 
             this.pwd.setText(client.getPwd());
             if (!client.getPwd().equals(""))
                 this.pwd.setSummary(pwd.getEditText().getTransformationMethod().getTransformation(client.getPwd(), pwd.getEditText()));
 
             this.ssid.setText(client.getAllowedSSID());
-            if (!client.getAllowedSSID().equals("")) this.ssid.setSummary(client.getAllowedSSID());
+            if (!client.getAllowedSSID().equals(""))
+                this.ssid.setSummary(client.getAllowedSSID());
 
             this.overwriteGlobalNotifications.setChecked(client.isOverwriteGlobalNotifications());
             this.overwriteGlobalEvents.setChecked(client.isOverwriteGlobalEvents());
@@ -170,16 +173,16 @@ public class ClientPreferenceFragment extends PreferenceFragment implements Pref
 
                 if (permissionState != PackageManager.PERMISSION_GRANTED) {
                     new AlertDialog.Builder(this.activity)
-                        .setTitle(getString(R.string.dialog_permission_title))
-                        .setMessage(getString(R.string.dialog_permission_location_msg))
-                        .setPositiveButton(getString(R.string.dialog_confirm), new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                ActivityCompat.requestPermissions(getActivity(),
-                                        new String[]{Manifest.permission.ACCESS_COARSE_LOCATION}, 1);
-                            }
-                        })
-                        .show();
+                            .setTitle(getString(R.string.dialog_permission_title))
+                            .setMessage(getString(R.string.dialog_permission_location_msg))
+                            .setPositiveButton(getString(R.string.dialog_confirm), new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    ActivityCompat.requestPermissions(getActivity(),
+                                            new String[]{Manifest.permission.ACCESS_COARSE_LOCATION}, 1);
+                                }
+                            })
+                            .show();
                 }
                 break;
         }
