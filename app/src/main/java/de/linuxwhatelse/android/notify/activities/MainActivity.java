@@ -1,6 +1,5 @@
 package de.linuxwhatelse.android.notify.activities;
 
-import android.Manifest;
 import android.app.FragmentTransaction;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
@@ -9,16 +8,13 @@ import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.provider.Settings;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
-import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.NotificationCompat;
-import android.support.v4.content.ContextCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -51,8 +47,6 @@ public class MainActivity extends ThemedAppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, BillingProcessor.IBillingHandler,
         SnoozeDialogFragment.OnSnoozeTimeSelected {
 
-    private static final int READ_PHONE_STATE_PERMISSION_REQUEST = 1;
-
     MainActivity context;
     Toolbar toolbar;
 
@@ -66,10 +60,10 @@ public class MainActivity extends ThemedAppCompatActivity
 
         setContentView(R.layout.main);
 
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        DrawerLayout navdrawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout navdrawer = findViewById(R.id.drawer_layout);
         if (navdrawer == null)
             return;
 
@@ -78,7 +72,7 @@ public class MainActivity extends ThemedAppCompatActivity
         navdrawer.addDrawerListener(toggle);
         toggle.syncState();
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.navdrawer_view);
+        NavigationView navigationView = findViewById(R.id.navdrawer_view);
 
         if (navigationView == null)
             return;
@@ -98,7 +92,6 @@ public class MainActivity extends ThemedAppCompatActivity
             snackbar.show();
         }
 
-        handlePermissions();
         handleSnoozedNotification();
     }
 
@@ -194,17 +187,6 @@ public class MainActivity extends ThemedAppCompatActivity
 
         drawer.closeDrawer(GravityCompat.START);
         return true;
-    }
-
-    private void handlePermissions() {
-        int phonePermissionState = ContextCompat.checkSelfPermission(this,
-                Manifest.permission.READ_PHONE_STATE);
-
-        if (phonePermissionState != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(this,
-                    new String[]{Manifest.permission.READ_PHONE_STATE},
-                    READ_PHONE_STATE_PERMISSION_REQUEST);
-        }
     }
 
     private boolean isNotificationAccessActivated() {
@@ -342,14 +324,5 @@ public class MainActivity extends ThemedAppCompatActivity
     @Override
     public void onBillingInitialized() {
         billingProcessor.purchase(this, Notify.GOOGLE_PLAY_IN_APP_DONATION_KEY);
-    }
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
-        switch (requestCode) {
-            case READ_PHONE_STATE_PERMISSION_REQUEST: {
-                break;
-            }
-        }
     }
 }

@@ -3,6 +3,8 @@ package de.linuxwhatelse.android.notify.receiver;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
+import android.telephony.PhoneStateListener;
+import android.util.Log;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -21,7 +23,6 @@ import de.linuxwhatelse.android.notify.services.Publisher;
  */
 public class CallReceiver extends PhoneCallReceiver {
 
-    @Override
     protected void onIncomingCallStarted(Context context, String number, Date start) {
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
         if (!preferences.getBoolean(Notify.PREFERENCE_KEY_EVENTS_SNOOZED, false)) {
@@ -42,7 +43,6 @@ public class CallReceiver extends PhoneCallReceiver {
         }
     }
 
-    @Override
     protected void onOutgoingCallStarted(Context context, String number, Date start) {
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
         if (!preferences.getBoolean(Notify.PREFERENCE_KEY_EVENTS_SNOOZED, false)) {
@@ -63,7 +63,6 @@ public class CallReceiver extends PhoneCallReceiver {
         }
     }
 
-    @Override
     protected void onIncomingCallEnded(Context context, String number, Date start, Date end) {
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
         if (!preferences.getBoolean(Notify.PREFERENCE_KEY_EVENTS_SNOOZED, false)) {
@@ -86,7 +85,6 @@ public class CallReceiver extends PhoneCallReceiver {
         }
     }
 
-    @Override
     protected void onOutgoingCallEnded(Context context, String number, Date start, Date end) {
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
         if (!preferences.getBoolean(Notify.PREFERENCE_KEY_EVENTS_SNOOZED, false)) {
@@ -108,7 +106,6 @@ public class CallReceiver extends PhoneCallReceiver {
         }
     }
 
-    @Override
     protected void onMissedCall(Context context, String number, Date start) {
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
         if (!preferences.getBoolean(Notify.PREFERENCE_KEY_EVENTS_SNOOZED, false)) {
