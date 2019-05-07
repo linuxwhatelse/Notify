@@ -61,6 +61,9 @@ public class NLService extends NotificationListenerService {
             return;
 
         NotifyNotification noti = new NotifyNotification(getApplicationContext(), sbn);
+        if (! noti.hastTitleAndText())
+            return;
+
         Publisher.send(getApplicationContext(), clients, Notify.PATH_NOTIFICATION_POSTED, noti.getAsJSON());
     }
 

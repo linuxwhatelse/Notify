@@ -202,4 +202,13 @@ public class NotifyNotification {
             return bm;
         }
     }
+
+    public boolean hastTitleAndText() {
+        return !this.title.equals("") &&
+                (!this.text.equals("")
+                        || !this.bigText.equals("")
+                        || !this.infoText.equals("")
+                        || !this.tickerText.equals("")
+                        || !this.subText.equals(""));
+    }
 }
