@@ -92,6 +92,8 @@
     <string name="preference_foreground">Run in foreground</string>
     <string name="preference_foreground_summary">If after some time notification don\'t get forwarded anymore, try enabling this.</string>
 
+    <string name="preference_wifi_lock">Enable Wifi Locking</string>
+    <string name="preference_wifi_lock_summary">If notifications do not get forwarded when your phone is idle, try enabling this.</string>
 
     <!-- About -->
     <string name="about_version">Version</string>

@@ -6,8 +6,10 @@ package de.linuxwhatelse.android.notify.services;
 
 import android.app.Notification;
 import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.wifi.WifiManager;
 import android.preference.PreferenceManager;
 import android.service.notification.NotificationListenerService;
 import android.service.notification.StatusBarNotification;
@@ -24,7 +26,11 @@ import de.linuxwhatelse.android.notify.models.NotifyNotification;
 
 public class NLService extends NotificationListenerService {
     private static int FOREGROUND_NOTIFICATION_ID = 1;
+    private static String WIFI_LOCK_TAG = "NOTIFY";
 
+    private Context context;
+
+    private WifiManager.WifiLock wifiLock = null;
     private SharedPreferences preferences = null;
 
     private static boolean isOngoing(Notification notification) {
@@ -35,16 +41,21 @@ public class NLService extends NotificationListenerService {
     public void onCreate() {
         super.onCreate();
 
-        this.preferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        context = getApplicationContext();
+
+        this.preferences = PreferenceManager.getDefaultSharedPreferences(context);
         this.preferences.registerOnSharedPreferenceChangeListener(preferenceChangeListener);
 
-        boolean foreground = preferences.getBoolean(Notify.PREFERENCE_KEY_FOREGROUND, false);
-        showForegroundNotification(foreground);
+        handleForegroundNotification();
+        handleWifiLock();
     }
 
     @Override
     public void onDestroy() {
         this.preferences.unregisterOnSharedPreferenceChangeListener(preferenceChangeListener);
+
+        releaseWifiLock();
+
         super.onDestroy();
     }
 
@@ -60,11 +71,12 @@ public class NLService extends NotificationListenerService {
         if (clients.size() <= 0)
             return;
 
-        NotifyNotification noti = new NotifyNotification(getApplicationContext(), sbn);
-        if (! noti.hastTitleAndText())
+        NotifyNotification noti = new NotifyNotification(context, sbn);
+        if (! noti.hastTitleAndText()) {
             return;
+        }
 
-        Publisher.send(getApplicationContext(), clients, Notify.PATH_NOTIFICATION_POSTED, noti.getAsJSON());
+        Publisher.send(context, clients, Notify.PATH_NOTIFICATION_POSTED, noti.getAsJSON());
     }
 
     @Override
@@ -76,12 +88,12 @@ public class NLService extends NotificationListenerService {
         if (clients.size() <= 0)
             return;
 
-        NotifyNotification noti = new NotifyNotification(getApplicationContext(), sbn);
-        Publisher.send(getApplicationContext(), clients, Notify.PATH_NOTIFICATION_REMOVED, noti.getAsJSON());
+        NotifyNotification noti = new NotifyNotification(context, sbn);
+        Publisher.send(context, clients, Notify.PATH_NOTIFICATION_REMOVED, noti.getAsJSON());
     }
 
     private ArrayList<Client> getClientsToNotify(String packageName) {
-        ClientsDataSource dataSource = new ClientsDataSource(getApplicationContext());
+        ClientsDataSource dataSource = new ClientsDataSource(context);
         ArrayList<Client> clients = dataSource.getClientsToNotifyForPackage(packageName);
         dataSource.close();
 
@@ -93,26 +105,30 @@ public class NLService extends NotificationListenerService {
         public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
             switch (key) {
                 case Notify.PREFERENCE_KEY_FOREGROUND:
-                    boolean foreground = sharedPreferences.getBoolean(Notify.PREFERENCE_KEY_FOREGROUND, false);
-                    showForegroundNotification(foreground);
+                    handleForegroundNotification();
+                    break;
+                case Notify.PREFERENCE_KEY_WIFI_LOCK:
+                    handleWifiLock();
                     break;
             }
         }
     };
 
-    private void showForegroundNotification(boolean show) {
+    private void handleForegroundNotification() {
+        boolean show = preferences.getBoolean(Notify.PREFERENCE_KEY_FOREGROUND, false);
+
         if (!show) {
             stopForeground(true);
             return;
         }
 
-        Intent showTaskIntent = new Intent(getApplicationContext(), MainActivity.class);
+        Intent showTaskIntent = new Intent(context, MainActivity.class);
         showTaskIntent.setAction(Intent.ACTION_MAIN);
         showTaskIntent.addCategory(Intent.CATEGORY_LAUNCHER);
         showTaskIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 
         PendingIntent contentIntent = PendingIntent.getActivity(
-                getApplicationContext(),
+                context,
                 0,
                 showTaskIntent,
                 PendingIntent.FLAG_UPDATE_CURRENT);
@@ -126,6 +142,39 @@ public class NLService extends NotificationListenerService {
                 .setOngoing(true);
 
         startForeground(FOREGROUND_NOTIFICATION_ID, mBuilder.build());
+    }
+
+    private void handleWifiLock() {
+        boolean wifiLock = preferences.getBoolean(Notify.PREFERENCE_KEY_WIFI_LOCK, false);
+        if (wifiLock) {
+            holdWifiLock();
+        } else {
+            releaseWifiLock();
+        }
+    }
+
+    private void holdWifiLock() {
+        WifiManager wifiManager = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
+
+        if (wifiLock == null) {
+            wifiLock = wifiManager.createWifiLock(WifiManager.WIFI_MODE_FULL, WIFI_LOCK_TAG);
+        }
+
+        wifiLock.setReferenceCounted(false);
+
+        if (! wifiLock.isHeld()) {
+            wifiLock.acquire();
+        }
+    }
+
+    private void releaseWifiLock() {
+        if (wifiLock == null)
+            return;
+
+        if (wifiLock.isHeld()) {
+            wifiLock.release();
+            wifiLock= null;
+        }
     }
 
 }
