@@ -7,15 +7,6 @@
         android:title="@string/about_version" />
 
     <Preference
-        android:key="about_licenses"
-        android:persistent="false"
-        android:title="@string/about_licenses" />
-
-    <Preference
-        android:key="about_google_plus"
-        android:persistent="false"
-        android:title="@string/about_lwe_google_plus" />
-    <Preference
         android:key="about_github"
         android:persistent="false"
         android:defaultValue=""

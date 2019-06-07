@@ -37,12 +37,6 @@ public class AboutPreferenceFragment extends PreferenceFragment {
     @Override
     public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference preference) {
         switch (preference.getKey()) {
-            case "about_licenses":
-                startActivity(new Intent(Intent.ACTION_VIEW, Notify.URI_LINUXWHATELSE_NOTIFY_LICENSES));
-                break;
-            case "about_google_plus":
-                startActivity(new Intent(Intent.ACTION_VIEW, Notify.URI_LINUXWHATELSE_GOOGLE_PLUS));
-                break;
             case "about_github":
                 startActivity(new Intent(Intent.ACTION_VIEW, Notify.URI_LINUXWHATELSE_GITHUB));
                 break;
