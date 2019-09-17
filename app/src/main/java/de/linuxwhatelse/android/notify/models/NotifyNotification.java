@@ -52,7 +52,11 @@ public class NotifyNotification {
         this.notification = sbn.getNotification();
         this.notificationExtras = this.notification.extras;
 
-        String largeIcon = getBase64EncodedIcon((Bitmap) this.notificationExtras.getParcelable(Notification.EXTRA_LARGE_ICON));
+        try {
+            this.largeIcon = getBase64EncodedIcon((Bitmap) this.notificationExtras.getParcelable(Notification.EXTRA_LARGE_ICON));
+        } catch (ClassCastException e) {
+            this.largeIcon = "";
+        }
 
         this.id = sbn.getId();
         this.appName = getAppName();
@@ -66,7 +70,6 @@ public class NotifyNotification {
         this.tickerText = (this.notification.tickerText != null) ? this.notification.tickerText.toString() : "";
         this.subText = this.notificationExtras.getCharSequence(Notification.EXTRA_SUB_TEXT, "").toString();
         this.displayTime = 5000;
-        this.largeIcon = largeIcon;
         this.appIcon = getApplicationIcon();
         this.smallIcon = getNotificationSmallIcon();
         this.actions = this.notification.actions;
