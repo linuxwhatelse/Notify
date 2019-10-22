@@ -37,6 +37,10 @@ public class NLService extends NotificationListenerService {
         return (notification.flags & Notification.FLAG_ONGOING_EVENT) != 0;
     }
 
+    private static boolean isGroupSummary(Notification notification) {
+        return (notification.flags & Notification.FLAG_GROUP_SUMMARY) != 0;
+    }
+
     @Override
     public void onCreate() {
         super.onCreate();
@@ -62,6 +66,9 @@ public class NLService extends NotificationListenerService {
     @Override
     public void onNotificationPosted(StatusBarNotification sbn) {
         if (isOngoing(sbn.getNotification()))
+            return;
+
+        if (isGroupSummary(sbn.getNotification()))
             return;
 
         if (preferences.getBoolean(Notify.PREFERENCE_KEY_NOTIFICATIONS_SNOOZED, false))
