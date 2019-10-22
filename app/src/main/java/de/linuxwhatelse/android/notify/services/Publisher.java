@@ -14,6 +14,7 @@ import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.InetAddress;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 
 import de.linuxwhatelse.android.notify.models.Client;
@@ -29,7 +30,7 @@ public class Publisher extends AsyncTask<Object, Void, Boolean> {
     JSONObject data;
 
 
-    public Publisher(Context context) {
+    private Publisher(Context context) {
         this.context = context;
     }
 
@@ -84,11 +85,7 @@ public class Publisher extends AsyncTask<Object, Void, Boolean> {
 
         String auth = null;
         if (!client.getUser().equals("") && !client.getPwd().equals("")) {
-            try {
-                auth = Base64.encodeToString((client.getUser() + ":" + client.getPwd()).getBytes("UTF-8"), Base64.NO_WRAP);
-            } catch (UnsupportedEncodingException ex) {
-                ex.printStackTrace();
-            }
+            auth = Base64.encodeToString((client.getUser() + ":" + client.getPwd()).getBytes(StandardCharsets.UTF_8), Base64.NO_WRAP);
         }
 
         HttpURLConnection conn = null;
